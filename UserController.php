@@ -9,7 +9,7 @@ class UserController{
     private ?string $fullname;
     private ?int $phone;
     private ?string $password;
-    private ?string $msg;
+    public ?string $msg;
 
     public function __constructor(){
         
@@ -46,16 +46,14 @@ class UserController{
         if(preg_match($regex, $password)){
             $checkRegex = true;
         }else{
-            var_dump("Le mot de passe n'est pas conforme.");
-            $this->msg = "Le mot de passe n'est pas conforme.";
+            $this->msg = "<p class='error'>Le mot de passe n'est pas conforme.</p>";
         }
 
         // check si les mot de passe sont identiques
         if($password === $confirmPassword){
             $checkConfirmPassword = true;
         }else{
-            var_dump("Les mots de passe ne sont pas identiques.");
-            $this->msg = "Les mots de passe ne sont pas identiques.";
+            $this->msg = "<p class='error'>Les mots de passe ne sont pas identiques.</p>";
         }
 
         // check is le password est validé
@@ -72,8 +70,7 @@ class UserController{
         if($count < 1){
             return true;
         }else{
-            var_dump("L'email est déjà utilisé.");
-            $this->$msg = "L'email est déjà utilisé.";
+            $this->msg = "<p class='error'>L'email est déjà utilisé.</p>";
         }
     }
 
@@ -95,12 +92,12 @@ class UserController{
                         $request = new UserModel();
                         $request->requestRegister($post['login'], $post['email'], $post['fullname'], $post['phone'], $post['password']);
                         
-                        $this->msg = "Inscription réussie.";
+                        $this->msg = "<p class='trueMsg'>Inscription réussie.</p>";
                     }
                 }
             }
         }else{
-            var_dump("remplir tous les champs");
+            $this->msg = "<p class='error'>remplir tous les champs</p>";
         }
     }
 
@@ -122,12 +119,10 @@ class UserController{
                 // var_dump("success");
                 return true;
             }else{
-                echo "Le mot de passe est incorrect";
-                $this->msg = "Identifiant ou mot de passe incorrect";
+                $this->msg = "<p class='error'>Identifiant ou mot de passe incorrect</p>";
             }
         }else{
-            echo "L'identifiant est incorrect";
-            $this->msg = "Identifiant est incorrect";
+            $this->msg = "<p class='error'>Identifiant est incorrect</p>";
         }
         
     }
@@ -139,8 +134,6 @@ class UserController{
                     $request = new UserModel();
                     $data = $request->requestGetDataMail($post['email']);
 
-                    var_dump($data);
-
                     $userConnected = new UserController();
 
                     $userConnected->setId(intval($data['id']));
@@ -151,12 +144,13 @@ class UserController{
                     $userConnected->setPassword($data['password']);
 
                     $_SESSION['user'] = $userConnected;
-                    var_dump($userConnected);
+
                     $this->msg = "Vous êtes connecté(e)";
+                    
                 }
             }
         }else{
-            echo "remplir tout les champs";
+            $this->msg = "<p class='error'>remplir tout les champs.</p>";
         }
     }
 
@@ -218,12 +212,31 @@ class UserController{
 
 
             }else{
-                var_dump("Le mot de passe est faux");
+                $this->msg = "<p class='error'>Le mot de passe est faux</p>";
             }
         }else{
-            var_dump("Remplir tous les champs.");
+            $this->msg = "<p class='error'>Remplir tous les champs.</p>";
         }
 
+    }
+
+    public function disConnect(){
+        session_unset();
+        session_destroy();
+            
+        header("location: index.php");
+    }
+
+
+    ##################################################################################
+    ######################################## Admin ###################################
+    ##################################################################################
+
+    function GetAllData(){
+        $request = new UserModel();
+        $data = $request->requestGetAllData();
+
+        return $data;
     }
 
     ##################################################################################
@@ -253,6 +266,10 @@ class UserController{
 
     public function getPassword(){
         return $this->password;
+    }
+
+    public function getMsg(){
+        return $this->msg;
     }
 
 

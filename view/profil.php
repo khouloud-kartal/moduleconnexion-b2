@@ -7,8 +7,10 @@
 
     $user = $_SESSION['user'];
 
-    if(isset($_POST['submit'])){
+    if($_POST != NULL && isset($_GET['inscription'])){
         $users->Update($_POST);
+        echo $users->getMsg();
+        die();
     }
     
 ?>
@@ -16,7 +18,7 @@
 <?php require_once './header-footer/header.php';?>
 
 <main>
-    <form action="profil.php" method="post">
+    <form action="profil.php" method="post" id="profil">
         <fieldset>
             <legend>Profil</legend>
 
@@ -42,6 +44,11 @@
             <input type="password" name="confirmNewPassword" id="confirmNewPassword">
 
             <button type="submit" name="submit" value="submit">Submit</button>
+
+            <div id="message"></div>
         </fieldset>
     </form>
 </main>
+
+</body>
+</html>

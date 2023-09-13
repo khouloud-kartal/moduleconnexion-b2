@@ -61,4 +61,13 @@ class UserModel{
         $request->execute($changes);
     }
 
+    public function requestGetAllData(){
+        $request = $this->connect->prepare("SELECT * FROM users");
+        $request->execute();
+
+        $data = $request->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $data;
+    }
+
 }
