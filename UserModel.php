@@ -56,8 +56,8 @@ class UserModel{
 
         $request = $this->connect->prepare($strRequest);
 
-        var_dump($request);
-        var_dump($changes);
+        // var_dump($request);
+        // var_dump($changes);
         $request->execute($changes);
     }
 
@@ -68,6 +68,11 @@ class UserModel{
         $data = $request->fetchAll(\PDO::FETCH_ASSOC);
 
         return $data;
+    }
+
+    function requestDeleteUser($id){
+        $request = $this->connect->prepare("DELETE FROM users WHERE id = :id");
+        $request->execute([':id' => $id]);
     }
 
 }

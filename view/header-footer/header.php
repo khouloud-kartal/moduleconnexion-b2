@@ -25,7 +25,7 @@
                 <?php if (!isset($_SESSION['user'])){ ?><a href="connexion.php">Sign In</a><?php } ?>
                 <?php if (!isset($_SESSION['user'])){ ?><a href="inscription.php">Sign Up</a><?php } ?>
                 <?php if (isset($_SESSION['user'])){ ?><a href="profil.php">Profil</a><?php } ?>
-                <?php if ((isset($_SESSION['user'])) && ($_SESSION['user']->getLogin() === 'admiN1337$')){ ?><a href="admin.php">Admin</a><?php } ?>
+                <?php if ((isset($_SESSION['user'])) && ($_SESSION['user']->getEmail() === 'admiN1337$@test.fr')){ ?><a href="admin.php">Admin</a><?php } ?>
                 <?php if (isset($_SESSION['user'])){ ?><a href="disconnect.php">Disconnect</a><?php } ?>
             
             </nav>    

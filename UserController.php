@@ -145,7 +145,7 @@ class UserController{
 
                     $_SESSION['user'] = $userConnected;
 
-                    $this->msg = "Vous êtes connecté(e)";
+                    $this->msg = "Vous êtes connecté(e), vous allez être rédiger dans la page d'acceuil dans 2 secondes.";
                     
                 }
             }
@@ -208,6 +208,9 @@ class UserController{
                 if(!empty($changes)){
                     $request = new UserModel();
                     $data = $request->requestUpdate($idUser, $changes);
+                    $this->msg = "<p>Les changements ont été effectués.</p>";
+                }else{
+                    $this->msg = "<p class='error'>Rien n'a été changé.</p>";
                 }
 
 
@@ -237,6 +240,12 @@ class UserController{
         $data = $request->requestGetAllData();
 
         return $data;
+    }
+
+
+    function DeleteUser($id){
+        $request = new UserModel();
+        $data = $request->requestDeleteUser($id);
     }
 
     ##################################################################################

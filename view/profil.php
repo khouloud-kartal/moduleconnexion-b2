@@ -2,12 +2,11 @@
     require_once '../UserController.php';
 
     session_start();
-    
-    $users = new UserController();
 
     $user = $_SESSION['user'];
 
     if($_POST != NULL && isset($_GET['inscription'])){
+        $users = new UserController();
         $users->Update($_POST);
         echo $users->getMsg();
         die();

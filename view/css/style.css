@@ -92,3 +92,80 @@ button:hover{
 .error{
     color: brown;
 }
+
+#admin{
+    width: 70%;
+    margin-left: 15%;
+    display: flex;
+    flex-direction: column;
+    color: whitesmoke;
+}
+
+#admin h1{
+    padding: 0 0 20px 10px;
+}
+
+th, td{
+    text-align: center;
+    font-size: 1.2em;
+    
+}
+
+th{
+    height: 50px;
+    background-color: #b02cc77e;
+    border: 2px solid #b02cc7;
+}
+
+td{
+    height: 35px;
+    background-color: rgb(8, 45, 71);
+}
+
+.delete{
+    width: 50%;
+    margin-left: 10%;
+}
+
+#home{
+    padding: 10%;
+    color: white;
+    border: 2px solid #b02cc7;
+    border-radius: 10px 100px / 120px 100px;
+    background-color: #b02cc76c;
+}
+
+
+@media (max-width: 767px) {
+    header a{
+        font-size: 1.2em;
+    }
+
+    #admin h1{
+        font-size: 1.4em;
+    }
+
+    td{
+        font-size: 0.7em;
+        height: 20px;
+    }
+
+    th{
+        font-size: 0.7em;
+    }
+
+    .delete{
+        width: 20px;
+        height: 5px;
+        font-size: 0.2em;
+    }
+
+    #admin{
+        justify-content: flex-start;
+        padding-left: -10%;
+    }
+
+    table{
+        width: 100%;
+    }
+}
